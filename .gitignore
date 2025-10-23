@@ -1,3 +1,14 @@
 # temporary remove the Makefile
 # Have to implement a more official
 Makefile
+
+
+# Hide temporary files 
+*.o
+*.symvers
+*.order
+*.mod.c
+*.ko
+*.cmd
+.cache.mk
+.tmp_versions

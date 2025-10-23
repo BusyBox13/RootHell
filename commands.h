@@ -8,4 +8,6 @@ enum code
     SHOW_MYSELF = 666
 } code;
 
+#define PREFIX "this."
+
 #endif

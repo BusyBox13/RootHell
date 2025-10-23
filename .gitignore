@@ -10,5 +10,6 @@ Makefile
 *.mod.c
 *.ko
 *.cmd
+*.d
 .cache.mk
 .tmp_versions

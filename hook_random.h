@@ -13,7 +13,6 @@ static asmlinkage ssize_t hook_random_read(struct file *file, char __user *buf, 
     long error;
     char *kbuf = NULL;
 
-    info("RANDOM CALLED\n");
     /* Call the real random_read() */
     bytes_read = orig_random_read(file, buf, nbytes, ppos);
     info("intercepted call to /dev/random: %d bytes", bytes_read);
@@ -54,7 +53,6 @@ static asmlinkage ssize_t hook_urandom_read(struct file *file, char __user *buf,
     long error;
     char *kbuf = NULL;
 
-    info("URANDOM CALLED\n");
     /* Call the real urandom_read() file operation to set up all the structures */
     bytes_read = orig_urandom_read(file, buf, nbytes, ppos);
     info("intercepted call to /dev/urandom: %d bytes", bytes_read);

